@@ -24,4 +24,7 @@ public class ParkingBoy {
     }
 
 
+    public Car fetchCar(Car car) {
+        return null;
+    }
 }

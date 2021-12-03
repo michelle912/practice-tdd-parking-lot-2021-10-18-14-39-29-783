@@ -59,4 +59,22 @@ public class ParkingBoyTest {
         assertEquals(0, parkingLot1.getCurrentCapacity());
         assertEquals(9, parkingLot2.getCurrentCapacity());
     }
+
+    @Test
+    public void should_fetch_corresponding_car_when_fetchCar_given_valid_cars_and_cars_exist() throws Exception{
+        // given
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+
+        // when
+        Car result1 = parkingBoy.fetchCar(car1);
+        Car result2 = parkingBoy.fetchCar(car1);
+
+        // then
+        assertEquals(car1, result1);
+        assertEquals(car2, result2);
+    }
 }
