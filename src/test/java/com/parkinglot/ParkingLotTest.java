@@ -67,13 +67,12 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_null_when_fetchCar_given_invalid_ticket() {
+    public void should_return_null_when_fetchCar_given_invalid_ticket() throws Exception{
         // given
         ParkingLot parkingLot = new ParkingLot();
         Ticket invalidTicket = new Ticket();
 
         // when
-        Car result = parkingLot.fetchCar(invalidTicket);
 
         // then
         Exception exception = assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetchCar(invalidTicket));
@@ -89,10 +88,10 @@ public class ParkingLotTest {
         parkingLot.fetchCar(ticket);
 
         // when
-        Car result = parkingLot.fetchCar(ticket);
 
         // then
-        assertNull(result);
+        Exception exception = assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetchCar(invalidTicket));
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
 
 }

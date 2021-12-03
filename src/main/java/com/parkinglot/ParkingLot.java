@@ -26,9 +26,9 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car fetchCar(Ticket ticket) {
+    public Car fetchCar(Ticket ticket) throws UnrecognizedTicketException {
         if (!isValidTicket(ticket)) {
-            return null;
+            throw new UnrecognizedTicketException("Unrecognized parking ticket.");
         }
 
         return ticketToCarMap.remove(ticket);
