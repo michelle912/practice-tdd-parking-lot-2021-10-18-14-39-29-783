@@ -32,8 +32,7 @@ public class ParkingLot {
         }
 
         Car carToFetch = ticketToCarMap.get(ticket);
-        ticketToCarMap.remove(ticket);
-        return carToFetch;
+        return ticketToCarMap.remove(ticket);
     }
 
     private boolean hasAvailableSlot() {
