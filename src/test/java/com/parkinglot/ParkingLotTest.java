@@ -48,4 +48,22 @@ public class ParkingLotTest {
         assertEquals(car, result);
     }
 
+    @Test
+    public void should_return_corresponding_car_when_fetchCar_given_valid_tickets_and_cars_exist() {
+        // given
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot = new ParkingLot();
+        Ticket ticket1 = parkingLot.parkCar(car1);
+        Ticket ticket2 = parkingLot.parkCar(car2);
+
+        // when
+        Car result1 = parkingLot.fetchCar(ticket1);
+        Car result2 = parkingLot.fetchCar(ticket2);
+
+        // then
+        assertEquals(car1, result1);
+        assertEquals(car2, result2);
+    }
+
 }
