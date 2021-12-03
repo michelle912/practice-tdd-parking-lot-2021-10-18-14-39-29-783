@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParkingLotTest {
 
     @Test
-    public void should_return_ticket_when_parkCar_given_valid_car_and_not_full_capacity() {
+    public void should_return_ticket_when_parkCar_given_valid_car_and_not_full_capacity() throws Exception{
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();
@@ -20,7 +20,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_null_when_parkCar_given_valid_car_and_full_capacity() {
+    public void should_return_null_when_parkCar_given_valid_car_and_full_capacity() throws Exception{
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
@@ -35,7 +35,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_car_when_fetchCar_given_valid_ticket_and_car_exists() {
+    public void should_return_car_when_fetchCar_given_valid_ticket_and_car_exists() throws Exception{
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();
@@ -49,7 +49,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_corresponding_car_when_fetchCar_given_valid_tickets_and_cars_exist() {
+    public void should_return_corresponding_car_when_fetchCar_given_valid_tickets_and_cars_exist() throws Exception{
         // given
         Car car1 = new Car();
         Car car2 = new Car();
@@ -80,7 +80,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_null_when_fetchCar_given_used_ticket_and_car_not_exist() {
+    public void should_return_null_when_fetchCar_given_used_ticket_and_car_not_exist() throws Exception{
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();

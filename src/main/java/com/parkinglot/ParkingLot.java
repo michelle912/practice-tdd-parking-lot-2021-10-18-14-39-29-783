@@ -17,9 +17,9 @@ public class ParkingLot {
         this.maxCapacity = maxCapacity;
     }
 
-    public Ticket parkCar(Car car) {
+    public Ticket parkCar(Car car) throws NoAvailablePositionException{
         if (!hasAvailableSlot()) {
-            return null;
+            throw new NoAvailablePositionException("No available position.");
         }
         Ticket ticket = new Ticket();
         ticketToCarMap.put(ticket, car);
