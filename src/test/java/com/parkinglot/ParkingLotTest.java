@@ -94,4 +94,6 @@ public class ParkingLotTest {
         assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
 
+    // finished
+
 }
