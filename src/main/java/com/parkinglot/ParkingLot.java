@@ -26,9 +26,8 @@ public class ParkingLot {
         return ticket;
     }
 
-
     private boolean hasAvailableSlot() {
-        return ticketToCarMap.size() < DEFAULT_CAPACITY;
+        return ticketToCarMap.size() < maxCapacity;
     }
 
 }
