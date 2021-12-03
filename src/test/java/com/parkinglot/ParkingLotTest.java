@@ -28,10 +28,10 @@ public class ParkingLotTest {
 
         // when
         Car incomingCar = new Car();
-        Ticket ticket = parkingLot.parkCar(incomingCar);
 
         // then
-        assertNull(ticket);
+        Exception exception = assertThrows(NoAvailablePositionException.class, () -> parkingLot.parkCar(incomingCar));
+        assertEquals("No available position.", exception.getMessage());
     }
 
     @Test

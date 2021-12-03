@@ -31,7 +31,6 @@ public class ParkingLot {
             return null;
         }
 
-        Car carToFetch = ticketToCarMap.get(ticket);
         return ticketToCarMap.remove(ticket);
     }
 
