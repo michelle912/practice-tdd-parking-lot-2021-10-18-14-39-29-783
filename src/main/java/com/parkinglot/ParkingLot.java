@@ -26,8 +26,19 @@ public class ParkingLot {
         return ticket;
     }
 
+    public Car fetchCar(Ticket ticket) {
+        if (!isValidTicket(ticket)) {
+            return null;
+        }
+        return ticketToCarMap.get(ticket);
+    }
+
     private boolean hasAvailableSlot() {
         return ticketToCarMap.size() < maxCapacity;
+    }
+
+    private boolean isValidTicket(Ticket ticket) {
+        return ticketToCarMap.containsKey(ticket);
     }
 
 }
