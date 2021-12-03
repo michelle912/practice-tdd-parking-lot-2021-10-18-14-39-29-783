@@ -44,4 +44,7 @@ public class ParkingLot {
         return ticketToCarMap.containsKey(ticket);
     }
 
+    public int getCurrentCapacity() {
+        return maxCapacity - ticketToCarMap.size();
+    }
 }

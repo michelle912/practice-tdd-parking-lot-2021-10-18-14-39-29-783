@@ -2,6 +2,7 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +15,7 @@ public class ParkingBoyTest {
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot));
 
         // when
         Ticket ticket = parkingBoy.parkCar(car);
@@ -37,6 +38,6 @@ public class ParkingBoyTest {
         // then
         assertNotNull(ticket);
         assertEquals(9, parkingLot1.getCurrentCapacity());
-        assertEquals(10, parkingLot1.getCurrentCapacity());
+        assertEquals(10, parkingLot2.getCurrentCapacity());
     }
 }

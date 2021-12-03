@@ -1,13 +1,27 @@
 package com.parkinglot;
 
-public class ParkingBoy {
-    private ParkingLot parkingLot;
+import java.util.List;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+public class ParkingBoy {
+    private List<ParkingLot> parkingLotList;
+
+    public ParkingBoy(List<ParkingLot> parkingLot) {
+        this.parkingLotList = parkingLot;
     }
 
     public Ticket parkCar(Car car) throws NoAvailablePositionException {
-        return parkingLot.parkCar(car);
+        ParkingLot availableParkingLot = parkingLotList
+                .stream()
+                .filter(parkingLot -> parkingLot.getCurrentCapacity() > 0)
+                .findFirst()
+                .orElse(null);
+
+        if (availableParkingLot == null) {
+            return null;
+        }
+
+        return availableParkingLot.parkCar(car);
     }
+
+
 }
