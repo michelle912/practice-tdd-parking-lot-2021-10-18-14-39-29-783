@@ -30,7 +30,10 @@ public class ParkingLot {
         if (!isValidTicket(ticket)) {
             return null;
         }
-        return ticketToCarMap.get(ticket);
+
+        Car carToFetch = ticketToCarMap.get(ticket);
+        ticketToCarMap.remove(ticket);
+        return carToFetch;
     }
 
     private boolean hasAvailableSlot() {
