@@ -7,7 +7,7 @@ public class ParkingBoy {
         this.parkingLot = parkingLot;
     }
 
-    public Ticket parkCar(Car car) {
-        return null;
+    public Ticket parkCar(Car car) throws NoAvailablePositionException {
+        return parkingLot.parkCar(car);
     }
 }
