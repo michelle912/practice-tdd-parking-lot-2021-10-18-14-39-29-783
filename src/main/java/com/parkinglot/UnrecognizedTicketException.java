@@ -1,0 +1,8 @@
+package com.parkinglot;
+
+public class UnrecognizedTicketException extends Exception{
+
+    public UnrecognizedTicketException(String message) {
+        super(message);
+    }
+}

@@ -76,7 +76,8 @@ public class ParkingLotTest {
         Car result = parkingLot.fetchCar(invalidTicket);
 
         // then
-        assertNull(result);
+        Exception exception = assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetchCar(invalidTicket));
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
 
     @Test
