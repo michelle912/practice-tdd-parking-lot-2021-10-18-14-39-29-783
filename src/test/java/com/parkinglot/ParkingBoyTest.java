@@ -92,4 +92,20 @@ public class ParkingBoyTest {
         // then
         assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetchCar(invalidTicket));
     }
+
+    @Test
+    public void should_throw_exception_when_fetchCar_given_used_ticket() throws Exception{
+        // given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        Ticket ticket = parkingBoy.parkCar(car);
+        parkingBoy.fetchCar(ticket);
+
+        // when
+
+        // then
+        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetchCar(ticket));
+    }
 }
