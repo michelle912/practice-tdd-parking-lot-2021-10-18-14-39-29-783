@@ -22,7 +22,13 @@ public class SmartParkingBoy {
         return availableParkingLot.parkCar(car);
     }
 
-    public Car fetchCar(Ticket ticket) {
-        return null;
+    public Car fetchCar(Ticket ticket) throws UnrecognizedTicketException {
+        ParkingLot correspondingLot = parkingLotList
+                .stream()
+                .filter(parkingLot -> parkingLot.isValidTicket(ticket))
+                .findFirst()
+                .orElseThrow(() -> new UnrecognizedTicketException(UNRECOGNIZED_TICKET_EXCEPTION_MSG));
+
+        return correspondingLot.fetchCar(ticket);
     }
 }
