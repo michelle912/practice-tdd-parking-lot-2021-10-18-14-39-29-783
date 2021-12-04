@@ -47,4 +47,12 @@ public class ParkingLot {
     public int getCurrentCapacity() {
         return maxCapacity - ticketToCarMap.size();
     }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public int getAvailablePositionRate() {
+        return ticketToCarMap.size() / maxCapacity;
+    }
 }
