@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingBoyTest {
 
@@ -78,5 +77,19 @@ public class ParkingBoyTest {
         // then
         assertEquals(car1, result1);
         assertEquals(car2, result2);
+    }
+
+    @Test
+    public void should_throw_exception_when_fetchCar_given_unrecognized_ticket() throws Exception{
+        // given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        Ticket invalidTicket = new Ticket();
+
+        // when
+
+        // then
+        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetchCar(invalidTicket));
     }
 }
