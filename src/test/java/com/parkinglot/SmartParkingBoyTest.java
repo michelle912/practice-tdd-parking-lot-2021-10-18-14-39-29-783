@@ -26,4 +26,22 @@ public class SmartParkingBoyTest {
 
     }
 
+    @Test
+    public void should_park_to_second_lot_when_parkCar_given_second_has_more_empty_positions() throws Exception {
+        // given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot1, parkingLot2));
+
+        // when
+        Ticket ticket = smartParkingBoy.parkCar(car);
+
+        // then
+        assertNotNull(ticket);
+        assertEquals(1, parkingLot1.getCurrentCapacity());
+        assertEquals(9, parkingLot2.getCurrentCapacity());
+
+    }
+
 }
