@@ -68,10 +68,12 @@ public class ParkingBoyTest {
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        Ticket ticket1 = parkingBoy.parkCar(car1);
+        Ticket ticket2 = parkingBoy.parkCar(car2);
 
         // when
-        Car result1 = parkingBoy.fetchCar(car1);
-        Car result2 = parkingBoy.fetchCar(car1);
+        Car result1 = parkingBoy.fetchCar(ticket1);
+        Car result2 = parkingBoy.fetchCar(ticket2);
 
         // then
         assertEquals(car1, result1);

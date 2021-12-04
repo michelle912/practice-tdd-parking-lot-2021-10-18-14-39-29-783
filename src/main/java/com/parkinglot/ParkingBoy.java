@@ -1,6 +1,9 @@
 package com.parkinglot;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.parkinglot.ParkingLotConstants.UNRECOGNIZED_TICKET_EXCEPTION_MSG;
 
 public class ParkingBoy {
     private List<ParkingLot> parkingLotList;
@@ -23,8 +26,15 @@ public class ParkingBoy {
         return availableParkingLot.parkCar(car);
     }
 
+    public Car fetchCar(Ticket ticket) throws UnrecognizedTicketException {
+        ParkingLot correspondingLot = parkingLotList
+                .stream()
+                .filter(parkingLot -> parkingLot.isValidTicket(ticket))
+                .findFirst()
+                .orElseThrow(() -> new UnrecognizedTicketException(UNRECOGNIZED_TICKET_EXCEPTION_MSG));
 
-    public Car fetchCar(Car car) {
-        return null;
+        return correspondingLot.fetchCar(ticket);
     }
+
+
 }

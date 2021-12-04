@@ -3,11 +3,11 @@ package com.parkinglot;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.parkinglot.ParkingLotConstants.*;
+
 public class ParkingLot {
 
-    private static final int DEFAULT_CAPACITY = 10;
-    private static final String NO_AVAILABLE_POSITION_EXCEPTION_MSG = "No available position.";
-    private static final String UNRECOGNIZED_TICKET_EXCEPTION_MSG = "Unrecognized parking ticket.";
+
     private int maxCapacity;
     Map<Ticket, Car> ticketToCarMap = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class ParkingLot {
         return ticketToCarMap.size() < maxCapacity;
     }
 
-    private boolean isValidTicket(Ticket ticket) {
+    protected boolean isValidTicket(Ticket ticket) {
         return ticketToCarMap.containsKey(ticket);
     }
 
