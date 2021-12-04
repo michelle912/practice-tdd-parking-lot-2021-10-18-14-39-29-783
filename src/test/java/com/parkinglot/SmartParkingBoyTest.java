@@ -44,4 +44,24 @@ public class SmartParkingBoyTest {
 
     }
 
+    @Test
+    public void should_fetch_corresponding_car_when_fetchCar_given_valid_cars_and_cars_exist() throws Exception{
+        // given
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot1, parkingLot2));
+        Ticket ticket1 = smartParkingBoy.parkCar(car1);
+        Ticket ticket2 = smartParkingBoy.parkCar(car2);
+
+        // when
+        Car result1 = smartParkingBoy.fetchCar(ticket1);
+        Car result2 = smartParkingBoy.fetchCar(ticket2);
+
+        // then
+        assertEquals(car1, result1);
+        assertEquals(car2, result2);
+    }
+
 }
