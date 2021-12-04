@@ -108,4 +108,22 @@ public class ParkingBoyTest {
         // then
         assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetchCar(ticket));
     }
+
+    @Test
+    public void should_throw_exception_when_fetchCar_given_all_full_capacity() throws Exception{
+        // given
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        parkingBoy.parkCar(car1);
+        parkingBoy.parkCar(car2);
+
+        // when
+
+        // then
+        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.parkCar(car3));
+    }
 }

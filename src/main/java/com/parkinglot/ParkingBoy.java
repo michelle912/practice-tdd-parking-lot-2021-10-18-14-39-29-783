@@ -3,6 +3,7 @@ package com.parkinglot;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.parkinglot.ParkingLotConstants.NO_AVAILABLE_POSITION_EXCEPTION_MSG;
 import static com.parkinglot.ParkingLotConstants.UNRECOGNIZED_TICKET_EXCEPTION_MSG;
 
 public class ParkingBoy {
@@ -17,11 +18,7 @@ public class ParkingBoy {
                 .stream()
                 .filter(parkingLot -> parkingLot.getCurrentCapacity() > 0)
                 .findFirst()
-                .orElse(null);
-
-        if (availableParkingLot == null) {
-            return null;
-        }
+                .orElseThrow(() -> new NoAvailablePositionException(NO_AVAILABLE_POSITION_EXCEPTION_MSG));
 
         return availableParkingLot.parkCar(car);
     }
