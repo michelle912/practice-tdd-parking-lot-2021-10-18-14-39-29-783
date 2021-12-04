@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SmartParkingBoyTest {
 
     @Test
-    public void should_park_to_first_lot_when_parkCar_given_same_number_empty_positions() {
+    public void should_park_to_first_lot_when_parkCar_given_same_number_empty_positions() throws Exception {
         // given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
