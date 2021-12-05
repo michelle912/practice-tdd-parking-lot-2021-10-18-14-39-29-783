@@ -1,7 +1,9 @@
 package com.parkinglot;
 
+import com.parkinglot.Exception.NoAvailablePositionException;
+import com.parkinglot.Exception.UnrecognizedTicketException;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.parkinglot.ParkingLotConstants.NO_AVAILABLE_POSITION_EXCEPTION_MSG;
 import static com.parkinglot.ParkingLotConstants.UNRECOGNIZED_TICKET_EXCEPTION_MSG;

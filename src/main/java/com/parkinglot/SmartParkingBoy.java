@@ -1,5 +1,8 @@
 package com.parkinglot;
 
+import com.parkinglot.Exception.NoAvailablePositionException;
+import com.parkinglot.Exception.UnrecognizedTicketException;
+
 import java.util.Comparator;
 import java.util.List;
 

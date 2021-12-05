@@ -1,5 +1,8 @@
 package com.parkinglot;
 
+import com.parkinglot.Exception.NoAvailablePositionException;
+import com.parkinglot.Exception.UnrecognizedTicketException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +22,7 @@ public class ParkingLot {
         this.maxCapacity = maxCapacity;
     }
 
-    public Ticket parkCar(Car car) throws NoAvailablePositionException{
+    public Ticket parkCar(Car car) throws NoAvailablePositionException {
         if (!hasAvailableSlot()) {
             throw new NoAvailablePositionException(NO_AVAILABLE_POSITION_EXCEPTION_MSG);
         }

@@ -1,5 +1,8 @@
 package com.parkinglot;
 
+import com.parkinglot.Exception.NoAvailablePositionException;
+import com.parkinglot.Exception.ParkingBoyNotUnderManagementException;
+import com.parkinglot.Exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -9,17 +12,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotManagerTest {
-
-    @Disabled
-    @Test
-    public void should_add_to_manage_list_when_addManagementList_given_valid_parkingBoy() {
-        // given
-
-        // when
-
-        // then
-
-    }
 
     @Test
     public void should_park_car_in_parkingboy_car_park_when_parkCarByParkingBoy_given_valid_parkingBoy_valid_car_not_full_capacity() throws Exception {
@@ -53,28 +45,29 @@ public class ParkingLotManagerTest {
         // when
 
         // then
-        assertThrows(Exception.class, () -> parkingLotManager.parkCarByParkingBoy(car, normalParkingBoy)); // FIXME:
+        assertThrows(ParkingBoyNotUnderManagementException.class, () -> parkingLotManager.parkCarByParkingBoy(car, normalParkingBoy)); // FIXME:
 
     }
 
     @Test
-    public void should_throw_exception_when_parkCarByParkingBoy_given_valid_parkingBoy_valid_car_full_capacity() {
+    public void should_throw_exception_when_parkCarByParkingBoy_given_valid_parkingBoy_valid_car_full_capacity() throws Exception {
         // given
-        Car car = new Car();
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
-        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1));
         ParkingLotManager parkingLotManager = new ParkingLotManager(List.of(normalParkingBoy));
+        parkingLotManager.parkCarByParkingBoy(car1, normalParkingBoy);
 
         // when
 
         // then
-        assertThrows(NoAvailablePositionException.class, () -> parkingLotManager.parkCarByParkingBoy(car, normalParkingBoy));
+        assertThrows(NoAvailablePositionException.class, () -> parkingLotManager.parkCarByParkingBoy(car2, normalParkingBoy));
 
     }
 
     @Test
-    public void should_fetch_car_in_parkingboy_car_park_when_fetchCar_given_valid_ticket_and_car_exist_in_parkingboy_car_park() throws Exception {
+    public void should_fetch_car_in_parkingboy_car_park_when_fetchCarByParkingBoy_given_valid_ticket_and_car_exist_in_parkingboy_car_park() throws Exception {
         // given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
@@ -84,7 +77,7 @@ public class ParkingLotManagerTest {
         Ticket ticket = parkingLotManager.parkCarByParkingBoy(car, normalParkingBoy);
 
         // when
-        Car result = parkingLotManager.fetchCar(ticket);
+        Car result = parkingLotManager.fetchCarByParkingBoy(ticket, normalParkingBoy);
 
         // then
         assertNotNull(result);
@@ -92,7 +85,7 @@ public class ParkingLotManagerTest {
     }
 
     @Test
-    public void should_throw_exception_when_fetchCar_given_invalid_ticket() throws Exception {
+    public void should_throw_exception_when_fetchCarByParkingBoy_given_invalid_ticket() throws Exception {
         // given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
@@ -104,12 +97,12 @@ public class ParkingLotManagerTest {
         Ticket ticket = new Ticket();
 
         // then
-        assertThrows(UnrecognizedTicketException.class, () -> parkingLotManager.fetchCar(ticket));
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLotManager.fetchCarByParkingBoy(ticket, normalParkingBoy));
 
     }
 
     @Test
-    public void should_throw_exception_when_fetchCar_given_used_ticket() throws Exception {
+    public void should_throw_exception_when_fetchCarByParkingBoy_given_used_ticket() throws Exception {
         // given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
@@ -117,12 +110,12 @@ public class ParkingLotManagerTest {
         NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
         ParkingLotManager parkingLotManager = new ParkingLotManager(List.of(normalParkingBoy));
         Ticket ticket = parkingLotManager.parkCarByParkingBoy(car, normalParkingBoy);
-        parkingLotManager.fetchCar(ticket);
+        parkingLotManager.fetchCarByParkingBoy(ticket, normalParkingBoy);
 
         // when
 
         // then
-        assertThrows(UnrecognizedTicketException.class, () -> parkingLotManager.fetchCar(ticket));
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLotManager.fetchCarByParkingBoy(ticket, normalParkingBoy));
 
     }
 
@@ -173,7 +166,7 @@ public class ParkingLotManagerTest {
         parkingLotManager.setParkingLot(List.of(parkingLot1, parkingLot2));
         parkingLotManager.parkCar(car1);
         assertEquals(0, parkingLot1.getCurrentCapacity());
-        assertEquals(10, parkingLot1.getCurrentCapacity());
+        assertEquals(10, parkingLot2.getCurrentCapacity());
 
         // when
         Ticket ticket = parkingLotManager.parkCar(car2);
@@ -198,6 +191,41 @@ public class ParkingLotManagerTest {
 
         // then
         assertThrows(NoAvailablePositionException.class, () -> parkingLotManager.parkCar(car2));
+
+    }
+
+    @Test
+    public void should_throw_exception_when_fetchCar_given_invalid_ticket() throws Exception {
+        // given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLotManager parkingLotManager = new ParkingLotManager();
+        parkingLotManager.setParkingLot(List.of(parkingLot1, parkingLot2));
+
+        // when
+        Ticket ticket = new Ticket();
+
+        // then
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLotManager.fetchCar(ticket));
+
+    }
+
+    @Test
+    public void should_throw_exception_when_fetchCar_given_used_ticket() throws Exception {
+        // given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLotManager parkingLotManager = new ParkingLotManager();
+        parkingLotManager.setParkingLot(List.of(parkingLot1, parkingLot2));
+        Ticket ticket = parkingLotManager.parkCar(car);
+        parkingLotManager.fetchCar(ticket);
+
+        // when
+
+        // then
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLotManager.fetchCar(ticket));
 
     }
 
