@@ -7,17 +7,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParkingBoyTest {
+public class NormalParkingBoyTest {
 
     @Test
     public void should_return_ticket_when_parkCar_given_valid_car_and_not_full_capacity() throws Exception{
         // given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot));
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot));
 
         // when
-        Ticket ticket = parkingBoy.parkCar(car);
+        Ticket ticket = normalParkingBoy.parkCar(car);
 
         // then
         assertNotNull(ticket);
@@ -29,10 +29,10 @@ public class ParkingBoyTest {
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
 
         // when
-        Ticket ticket = parkingBoy.parkCar(car);
+        Ticket ticket = normalParkingBoy.parkCar(car);
 
         // then
         assertNotNull(ticket);
@@ -48,10 +48,10 @@ public class ParkingBoyTest {
         ParkingLot parkingLot1 = new ParkingLot(1);
         parkingLot1.parkCar(car1);
         ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
 
         // when
-        Ticket ticket = parkingBoy.parkCar(car2);
+        Ticket ticket = normalParkingBoy.parkCar(car2);
 
         // then
         assertNotNull(ticket);
@@ -66,13 +66,13 @@ public class ParkingBoyTest {
         Car car2 = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
-        Ticket ticket1 = parkingBoy.parkCar(car1);
-        Ticket ticket2 = parkingBoy.parkCar(car2);
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
+        Ticket ticket1 = normalParkingBoy.parkCar(car1);
+        Ticket ticket2 = normalParkingBoy.parkCar(car2);
 
         // when
-        Car result1 = parkingBoy.fetchCar(ticket1);
-        Car result2 = parkingBoy.fetchCar(ticket2);
+        Car result1 = normalParkingBoy.fetchCar(ticket1);
+        Car result2 = normalParkingBoy.fetchCar(ticket2);
 
         // then
         assertEquals(car1, result1);
@@ -84,13 +84,13 @@ public class ParkingBoyTest {
         // given
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
         Ticket invalidTicket = new Ticket();
 
         // when
 
         // then
-        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetchCar(invalidTicket));
+        assertThrows(UnrecognizedTicketException.class, () -> normalParkingBoy.fetchCar(invalidTicket));
     }
 
     @Test
@@ -99,14 +99,14 @@ public class ParkingBoyTest {
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
-        Ticket ticket = parkingBoy.parkCar(car);
-        parkingBoy.fetchCar(ticket);
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
+        Ticket ticket = normalParkingBoy.parkCar(car);
+        normalParkingBoy.fetchCar(ticket);
 
         // when
 
         // then
-        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetchCar(ticket));
+        assertThrows(UnrecognizedTicketException.class, () -> normalParkingBoy.fetchCar(ticket));
     }
 
     @Test
@@ -117,13 +117,13 @@ public class ParkingBoyTest {
         Car car3 = new Car();
         ParkingLot parkingLot1 = new ParkingLot(1);
         ParkingLot parkingLot2 = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(List.of(parkingLot1, parkingLot2));
-        parkingBoy.parkCar(car1);
-        parkingBoy.parkCar(car2);
+        NormalParkingBoy normalParkingBoy = new NormalParkingBoy(List.of(parkingLot1, parkingLot2));
+        normalParkingBoy.parkCar(car1);
+        normalParkingBoy.parkCar(car2);
 
         // when
 
         // then
-        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.parkCar(car3));
+        assertThrows(NoAvailablePositionException.class, () -> normalParkingBoy.parkCar(car3));
     }
 }

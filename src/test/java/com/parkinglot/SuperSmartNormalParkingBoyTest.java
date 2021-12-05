@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SuperSmartParkingBoyTest {
+public class SuperSmartNormalParkingBoyTest {
 
     @Test
     public void should_park_to_first_lot_when_parkCar_given_same_number_empty_positions() throws Exception {

@@ -6,7 +6,7 @@ import java.util.List;
 import static com.parkinglot.ParkingLotConstants.NO_AVAILABLE_POSITION_EXCEPTION_MSG;
 import static com.parkinglot.ParkingLotConstants.UNRECOGNIZED_TICKET_EXCEPTION_MSG;
 
-public class SmartParkingBoy {
+public class SmartParkingBoy implements ParkingBoy{
     private List<ParkingLot> parkingLotList;
 
     public SmartParkingBoy(List<ParkingLot> parkingLot) {

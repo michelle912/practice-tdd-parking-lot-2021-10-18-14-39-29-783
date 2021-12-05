@@ -1,23 +1,23 @@
 package com.parkinglot;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.parkinglot.ParkingLotConstants.NO_AVAILABLE_POSITION_EXCEPTION_MSG;
 import static com.parkinglot.ParkingLotConstants.UNRECOGNIZED_TICKET_EXCEPTION_MSG;
 
-public class SuperSmartParkingBoy implements ParkingBoy{
-
+public class NormalParkingBoy implements ParkingBoy{
     private List<ParkingLot> parkingLotList;
 
-    public SuperSmartParkingBoy(List<ParkingLot> parkingLot) {
+    public NormalParkingBoy(List<ParkingLot> parkingLot) {
         this.parkingLotList = parkingLot;
     }
 
     public Ticket parkCar(Car car) throws NoAvailablePositionException {
         ParkingLot availableParkingLot = parkingLotList
                 .stream()
-                .max(Comparator.comparingDouble(ParkingLot::getAvailablePositionRate))
+                .filter(parkingLot -> parkingLot.getCurrentCapacity() > 0)
+                .findFirst()
                 .orElseThrow(() -> new NoAvailablePositionException(NO_AVAILABLE_POSITION_EXCEPTION_MSG));
 
         return availableParkingLot.parkCar(car);
@@ -32,4 +32,6 @@ public class SuperSmartParkingBoy implements ParkingBoy{
 
         return correspondingLot.fetchCar(ticket);
     }
+
+
 }
