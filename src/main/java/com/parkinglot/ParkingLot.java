@@ -53,6 +53,6 @@ public class ParkingLot {
     }
 
     public int getAvailablePositionRate() {
-        return ticketToCarMap.size() / maxCapacity;
+        return getCurrentCapacity() / maxCapacity;
     }
 }
